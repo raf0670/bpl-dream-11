@@ -1,28 +1,30 @@
+import { Suspense } from 'react';
 import './App.css'
+import Banner from './components/homepage/banner/Banner'
+import Players from './components/homepage/players/Players';
+import Navbar from './components/navbar'
+
+const fetchPlayers = async () => {
+  const res = await fetch("/data.json");
+  return res.json();
+};
 
 function App() {
-
+  const playersPromise = fetchPlayers();
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
-        </div>
-        <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
-            <li><a>Link</a></li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="bg-base-100 rounded-t-none p-2">
-                  <li><a>Link 1</a></li>
-                  <li><a>Link 2</a></li>
-                </ul>
-              </details>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Navbar></Navbar>
+      <Banner></Banner>
+
+      <Suspense fallback={<div className='flex gap-5 justify-center items-center p-10'>
+        <span className="loading loading-ring loading-xl"></span>
+        <span className="loading loading-ring loading-xl"></span>
+        <span className="loading loading-ring loading-xl"></span>
+        <span className="loading loading-ring loading-xl"></span>
+        <span className="loading loading-ring loading-xl"></span>
+      </div>}>
+        <Players playersPromise={playersPromise}></Players>
+      </Suspense>
     </>
   )
 }
