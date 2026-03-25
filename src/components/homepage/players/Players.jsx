@@ -1,10 +1,12 @@
 import React, { use } from 'react';
+import AvailablePlayers from './availablePlayers/AvailablePlayers';
 
 const Players = ({playersPromise}) => {
-    const data = use(playersPromise);
-    console.log(data);
+    const players = use(playersPromise);
+    // console.log(players);
     return (
-        <div>
+        <div className=''>
+            <AvailablePlayers players={players}></AvailablePlayers>
         </div>
     );
 };
