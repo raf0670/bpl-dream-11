@@ -2,7 +2,7 @@ import React from 'react';
 import dollarImg from "../assets/dollar_1.png";
 
 const Navbar = ({coins}) => {
-    console.log(coins);
+    // console.log(coins);
     return (
         <div className="navbar bg-base-100 my-5">
             <div className="flex-1">

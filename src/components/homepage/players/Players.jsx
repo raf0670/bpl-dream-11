@@ -7,19 +7,21 @@ const Players = ({ playersPromise, setCoins, coins }) => {
 
     const [selectedType, setSelectedType] = useState("available");
 
+    const [selectedPlayers, setSelectedPlayers] = useState([]);
+
     return (
         <div className=''>
 
             <div className='flex justify-between my-12 items-center'>
-                <h2 className='font-bold text-2xl'>{selectedType === "available" ? `Available Player` : `Selected (0/6)`}</h2>
+                <h2 className='font-bold text-2xl'>{selectedType === "available" ? `Available Player` : `Selected (${selectedPlayers.length}/${players.length})`}</h2>
 
                 <div>
                     <button onClick={() => setSelectedType("available")} className={`${selectedType === "available" ? `bg-[#E7FE29] text-black` : `bg-white text-gray-500`} p-1 px-5 font-semibold outline outline-gray-100 rounded-r-none rounded-xl hover:scale-105 duration-500`}>Available</button>
-                    <button onClick={() => setSelectedType("selected")} className={`${selectedType === "selected" ? `bg-[#E7FE29] text-black` : `bg-white text-gray-500`} p-1 px-5 font-semibold outline outline-gray-100 rounded-l-none rounded-xl hover:scale-105 duration-500`}>Selected (0)</button>
+                    <button onClick={() => setSelectedType("selected")} className={`${selectedType === "selected" ? `bg-[#E7FE29] text-black` : `bg-white text-gray-500`} p-1 px-5 font-semibold outline outline-gray-100 rounded-l-none rounded-xl hover:scale-105 duration-500`}>Selected ({selectedPlayers.length})</button>
                 </div>
             </div>
 
-            {selectedType === "available" ? <AvailablePlayers players={players} setCoins={setCoins} coins={coins}></AvailablePlayers> : <SelectedPlayers></SelectedPlayers>}
+            {selectedType === "available" ? <AvailablePlayers players={players} setCoins={setCoins} coins={coins} selectedPlayers={selectedPlayers} setSelectedPlayers={setSelectedPlayers}></AvailablePlayers> : <SelectedPlayers selectedPlayers={selectedPlayers} setSelectedPlayers={setSelectedPlayers} setCoins={setCoins} coins={coins}></SelectedPlayers>}
         </div>
     );
 };
